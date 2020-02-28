@@ -1,0 +1,27 @@
+<div id="home_promo">
+    <img src="img/promo.jpg" alt="Promotional">
+    <p class="slogan">We pay you <br>Quality</p>
+    
+</div>
+    <p class="inline">Products Category</p>
+<section id="home_sec">
+    {{#each products}}
+        <a href="{{href}}" class="boxforproducts"><div>
+            <p class="home_pro">
+                {{title}}
+            </p>
+             <img class="home_img" src="{{src}}" alt="products">
+        </div></a>
+    {{/each}}
+</section>
+    <p class="inline">Best selling products</p>
+<section id="best_seller">
+    {{#each bseller}}
+        <a href="{{href}}" class="boxforbest"><div>
+            <p class="home_pro">
+                {{title}}
+            </p>
+            <img class="home_best" src="{{src}}" alt="Best Selling Products">
+        </div></a>
+    {{/each}}
+</section>

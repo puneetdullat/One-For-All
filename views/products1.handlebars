@@ -1,0 +1,13 @@
+<section class="sec_allprod">
+    {{#each products}}
+        <div class="prod1_div">
+            {{#if best}}
+            <img class="best_seller_img" src="{{src1}}" alt="">
+            {{/if}}
+            <img class="prod1_img" src="{{src}}" alt="Products">
+            <br><span class="title_of_items">{{title}}</span>
+            <br><span class="price_of_items">{{price}}</span>
+            <span class="span_cate">{{category}}</span>
+        </div>
+    {{/each}}
+</section>

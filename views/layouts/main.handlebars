@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/bcc24e8464.js" crossorigin="anonymous"></script>
+    <title>{{title}}</title>
+</head>
+<body>   
+    <header>
+      <nav id="navi">
+          <a href="/"><img id="logo" src="/img/logo.png"></a>
+          <div id="searchbar">
+            <form>
+              <input type="text" placeholder="Search here" id="searchbarinput">
+            </form>
+            <i class="fas fa-search" id="searchbutton"></i>
+          </div>
+        <h2><a class="sec_main" href="/products">Products</a></h2>
+        <h2><a class="sec_main" href="/login">Sign In</a></h2>
+        <h2><a class="sec_main" href="/registration">Sign Up</a></h2>
+      </nav>
+    </header>
+    <main>
+      {{{body}}}
+    </main>
+    <footer id="foot">
+        <div>
+        <p id="foot_title">One For All</p><br>
+        <form id="form_footer" action="" method="POST" >
+          <label for="news">Do you wanna subscribe to our newsletter?</label>
+          <input type="email" name="news" placeholder="xyz@example.com" required class="pad_rad"><br>
+          <input type="submit" id="sub" value="Submit"><br><br>
+        </form>
+        <text id="creator">©2020 Puneet Singh Dullat</text>
+      </div>
+    </footer>
+
+</body>
+</html>

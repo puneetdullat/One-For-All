@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Raleway&display=swap');
+
+html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    overflow: auto;
+    background: whitesmoke;
+}
+#navi{
+    margin:0;
+    position: static;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    background:rgba(20, 20, 20,0.85);
+    z-index: 2;
+}
+#logo{
+    flex: .10;
+    height: 70px;
+}
+#searchbar{
+    margin-top: 19px;
+    height: 100%;
+    width: 100%;
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#searchbarinput{
+    padding: 10px;
+    border:0;
+    margin:0;
+    width: 50em;
+    background: white;
+    border-radius: 25px 0px 0px 25px;
+    outline:0px;
+}
+#searchbutton{
+    cursor: pointer;
+    padding: 10px;
+    border:0;
+    border-radius: 0px 25px 25px 0px;
+    margin: 0;
+    color: #f65058ff ;
+    background: white;      
+}
+header h2{
+    color: cadetblue;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+#home_promo{
+    position: relative;
+}
+.slogan{
+    position: absolute;
+    top:0px;
+    left:0px;
+    padding:0 1em;
+    font-weight:600;
+    font-size:3em;
+    color:white;
+    text-shadow:1px 1px 3px rgba(158, 44, 44, 0.8);
+    margin:1em;
+}
+#home_promo img{
+    width: 100%;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+}
+#home_sec{
+    position: static;
+    display: flex;
+    height:100%;
+    width:100%;
+}
+.home_img{
+    height: 12em;
+    width: 100%;
+}
+.boxforproducts{
+    text-decoration: none;
+    flex: 1;
+    padding:10px;
+    margin:10px;
+    border:1px solid darkgrey;
+    background-color:white;
+}
+#best_seller{
+    position: static;
+    display: flex;
+    height:100%;
+    width:100%;
+}
+.boxforbest{
+    text-decoration: none;
+    flex: 1;
+    padding:10px;
+    margin:10px;
+    border:1px solid darkgrey;
+    background-color:white;
+}
+.home_best{
+    height: 12em;
+    width: 100%;
+}
+#foot{
+    background-color:  darkred;
+    color: whitesmoke;
+}
+#form_regis{
+    display: inline-block;
+    margin: 2em;
+    margin-top: 55px;
+    margin-left: 8em;
+    padding: 20px;
+    border: 1px solid darkgrey;
+}
+#name, #email, #password{
+    width: 22em;
+}
+#btn_regis{
+    height: 40px;
+    width: 22em;
+    margin-left: 11.2em;
+}
+#btn_regis a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#form_login{
+    display: inline-block;
+    margin: 2em;
+    margin-top: 55px;
+    margin-left: 8em;
+    padding: 20px;
+    border: 1px solid darkgrey;
+}
+#login_email, #login_password{
+    width: 22em;
+}
+#btn_login{
+    height: 40px;
+    width: 22em;
+    margin-left: 11.2em;
+}
+#btn_login a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#foot form{
+    text-align: right;
+}
+footer form input{
+    margin-right: 2px;
+    border-radius: 5px;
+}
+footer form #sub{
+    margin-top: 8px;
+    margin-right: 114px;
+    padding-left: 4px;
+    border-radius: 3px;
+    border: 1px solid darkgrey;
+}
+footer{
+    margin-bottom: 0;
+}
+#sec_prod{
+    height: 100%;
+    width: 100%;
+}
+.prod_div{
+    border: 1px solid darkgrey;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    margin-left: 6em;
+    margin-top: 3em;
+}
+.prod_img{
+    height: 24em;
+    width: 34em;
+}
+.sec_allprod{
+    height: 100%;
+    width: 100%;
+}
+.prod1_div{
+    border: 1px solid darkgrey;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    margin-left: 6em;
+    margin-top: 3em;
+}
+.prod1_img{
+    height: 16em;
+    width: 22em;
+}
+main{
+    min-height: 70vh;
+}
+.sec_main
+{
+    font-family: 'Open Sans', sans-serif;
+    color: #f65058ff;
+    text-decoration: none;
+    font-weight: 400;
+}
+.inline{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1.6em;
+    color: #f65058ff;
+}
+.best_seller_img
+{
+    height: 40px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+}
+#foot_title
+{
+    font-family: 'Quicksand', sans-serif;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+#creator
+{
+    font-family: 'Quicksand', sans-serif;
+    line-height: 30px;
+    padding-left: 10px;
+}
+#form_footer
+{
+    padding-right: 5px;
+}
+#form_footer label{
+    font-family: 'Quicksand', sans-serif;
+}
+.home_pro
+{
+    font-family: 'Quicksand', sans-serif;     
+    color: #d31010;  
+    font-weight: bolder;
+}
+.pad_rad{
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid darkgray;
+    margin-top: 1px;
+    height: 18px;
+}
+.title_of_items{
+    color: #d31010;
+    font-weight: bold;  
+    font-size: 1.25em;
+}
+.price_of_items{
+    color: #f65058ff;
+    font-weight: 600;   
+}
+.title_of_items, .price_of_items{
+    font-family: 'Quicksand', sans-serif;
+}
+.main_head_lr{
+    font-size: 2.33em;
+    font-weight: 400;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 15px 0px;
+}
+#form_login label{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:600;
+    padding:3px;
+    height:30px;
+    font-size:1em;
+}
+#form_login input{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height:18px;
+    padding:10px;
+    border-radius:3px;
+    border:1px solid gray;
+}
+#form_login input[type="submit"]{
+    height: 40px;
+    width: 100%;
+}
+#form_regis input{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height:18px;
+    padding:10px;
+    border-radius:3px;
+    border:1px solid gray;
+}
+#form_regis input[type="submit"]{
+    height: 40px;
+    width: 100%;
+}
+.span_cate{
+    font-size: 14px;
+    font-weight: 100;
+    padding-left: 18em;
+    color: darkgray;
+    display: none;
+}
