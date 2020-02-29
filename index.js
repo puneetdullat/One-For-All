@@ -7,11 +7,15 @@ const products1 = require("./model/product1");
 const products2 = require("./model/products2");
 const products3 = require("./model/product3");
 const products4 = require("./model/product4");
+const bodyParser = require('body-parser');
+
 
 app.engine("handlebars",exphbs());
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get("/",(req,res)=>{
     res.render("home",{
@@ -67,6 +71,34 @@ app.get("/registration",(req,res)=>{
     });
 });
 
+app.post("/loginvalidation",(req,res)=>{
+    const errorMsg = [];
+    const errorMsg1 = [];
+    
+    if(req.body.email === ""){
+        errorMsg.push("Please enter your Email");
+    }
+
+    if(req.body.password === ""){
+        errorMsg1.push("Please enter your Password");
+    }
+
+    if(errorMsg.length > 0 || errorMsg1.length > 0){
+        res.render("login",{
+            title: 'Login',
+            errId: errorMsg,
+            errPass: errorMsg1,
+            id: req.body.email,
+            pass: req.body.password,
+        });
+    }
+    else{
+        res.render("login",{
+            title: 'login',
+            msg: "Successfully loged IN",
+        })
+    }
+});
 
 const PORT = 3000;
 app.listen(PORT,()=>{

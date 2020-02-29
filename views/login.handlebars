@@ -1,9 +1,18 @@
-<form action="/" method="POST" id="form_login">
+<div>{{msg}}</div>
+<form action="/loginvalidation" method="POST" id="form_login">
     <p class="main_head_lr">Sign In</p>
     <label for="email">Email</label><br>
-    <input type="text" name="email" id="login_email" autofocus tabindex="0"><br><br>
+    <input type="text" name="email" id="login_email" autofocus tabindex="0" value="{{id}}"><br>
+    {{#each errId}}
+        <span class="err_login">{{this}}</span><br>
+    {{/each}}
+    <br>
     <label for="password">Password</label><br>
-    <input type="password" name="password" id="login_password" tabindex="0"><br><br>
+    <input type="password" name="password" id="login_password" tabindex="0" value="{{pass}}"><br>
+    {{#each errPass}}
+        <span class="err_login">{{this}}</span><br>
+    {{/each}}
+    <br>
     <input type="submit" value="Login" tabindex="0">
 </form>
 <br>

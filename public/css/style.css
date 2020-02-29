@@ -319,3 +319,8 @@ main{
     color: darkgray;
     display: none;
 }
+.err_login{
+    color: red;
+    font-family: sans-serif;
+    font-size: 14px;
+}
