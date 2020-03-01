@@ -24,7 +24,6 @@ html,body{
     height: 70px;
 }
 #searchbar{
-    margin-top: 19px;
     height: 100%;
     width: 100%;
     flex:1;
@@ -323,4 +322,208 @@ main{
     color: red;
     font-family: sans-serif;
     font-size: 14px;
+}
+.for_flex{
+    display: flex;
+}
+#h_pad{
+    padding-left: 22em;
+}
+
+@media screen and (max-width: 1440px){    
+    #h_pad {
+        padding-left: 18em;
+    }
+}
+@media screen and (max-width: 1024px){
+    #h_pad{
+        padding: 0;
+    }
+    #searchbarinput{
+        width: 40em;
+    }
+    .slogan{
+        margin: 0;
+        top: 45px;
+    }
+    .prod_img {
+        height: 14em;
+        width: 22em;
+    }
+}
+@media screen and (max-width: 768px){    
+    .slogan{
+        margin: 0;
+        top: 54px;
+        font-size: 2.2em;   
+    }
+    #searchbarinput {
+        width: 20em;
+    }
+    #h_pad{
+        padding-left: 5px;
+    }
+    .prod1_img {
+        height: 13em;
+        width: 17em;
+    }
+    .prod1_div{
+        margin-left: 4em;
+    }
+    .prod_div{
+        margin-left: 1em;
+    }
+    .prod_img {
+        height: 14em;
+        width: 20em;
+    }
+}
+@media screen and (max-width: 480px){
+    main{
+        text-align: center;
+    }
+    #form_login{
+        margin: 1.2em;
+    }
+    #btn_login{
+        margin: 0;
+    }#form_regis{
+        margin: 1.2em;
+    }
+    #btn_regis{
+        margin: 0;
+    }
+    #home_sec, #best_seller{
+        display: grid;
+    }
+    .slogan {
+        top: 60px;
+        font-size: 1.5em;
+        padding: 0;
+        margin-left: 2px;
+    }
+    #navi{
+        display: inline-block;
+    }
+    #h_pad{
+        padding: 0;
+    }
+    #searchbar{
+        margin-top: 19px;
+    }
+    #searchbarinput{
+        width: 18em;
+    }
+    .prod1_img {
+        height: 15em;
+        width: 19em;
+    }
+    .prod_img {
+        height: 15em;
+        width: 19em;
+    }
+    .prod1_div{
+        margin: 10px;
+        margin-top: 2em;
+    }
+    .prod_div{
+        margin: 10px;
+        margin-top: 2em;
+    }
+    .sec_allprod{
+        text-align: center;
+    }
+    #sec_prod{
+        text-align: center;
+    }
+    .sec_prod{
+        text-align: center;
+    }
+}
+@media screen and (max-width: 375px){
+    #form_login{
+        margin: 0.2em;
+        margin-top: 20px;
+    }
+    #btn_login{
+        margin-top: 4px;
+    }#form_regis{
+        margin: 0.2em;
+        margin-top: 20px;
+    }
+    #btn_regis{
+        margin-top: 4px;
+    }
+}
+@media screen and (max-width: 360px){
+    #home_sec, #best_seller{
+        display: grid;
+    }
+    .slogan {
+        top: 60px;
+        font-size: 1.2em;
+        padding: 0;
+        margin-left: 2px;
+    }
+    #navi{
+        display: inline-block;
+    }
+    #h_pad{
+        padding: 0;
+    }
+    #searchbar{
+        margin-top: 19px;
+    }
+    #searchbarinput{
+        width: 14em;
+    }
+    .prod1_img {
+        height: 12em;
+        width: 100%;
+    }
+    .prod_img {
+        height: 12em;
+        width: 100%;
+    }
+    .prod1_div{
+        margin: 10px;
+        margin-top: 2em;
+    }
+    .prod_div{
+        margin: 10px;
+        margin-top: 2em;
+    }
+    .sec_allprod{
+        text-align: center;
+    }
+    #sec_prod{
+        text-align: center;
+    }
+    .sec_prod{
+        text-align: center;
+    }
+    .sec_main{
+        font-size: large;
+    }
+    #home_promo img {
+        height: 150px;
+    }
+    #form_footer label{
+        font-size: 0.8em;
+    }
+    #creator{
+        font-size: 0.8em;
+    }
+    #login_email, #login_password {
+        width: 16em;
+    }
+    #btn_login{
+        width: 16em;
+    }
+    #btn_regis{
+        width: 16em;
+    }
+    #name, #email, #password {
+        width: 16em;
+    }
 }
