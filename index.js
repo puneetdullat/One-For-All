@@ -74,7 +74,6 @@ app.get("/registration",(req,res)=>{
 app.post("/loginvalidation",(req,res)=>{
     const errorMsg = [];
     const errorMsg1 = [];
-    
     if(req.body.email === ""){
         errorMsg.push("Please enter your Email");
     }
@@ -96,7 +95,55 @@ app.post("/loginvalidation",(req,res)=>{
         res.render("login",{
             title: 'login',
             msg: "Successfully loged IN",
-        })
+        });
+    }
+});
+
+app.post("/registrationvalidation",(req,res)=>{
+    const errorMsg = [];
+    const errorMsg1 = [];
+    const errorMsg2 = [];
+    const reg = /^[a-zA-Z]+$/; 
+    const reg1 = /^\w+$/g;
+    const reg2 = /[\w-]+@([\w-]+\.)+[\w-]+/;
+    const len = req.body.password.length;
+    if(req.body.name === "" || !(req.body.name.match(reg))){
+        errorMsg.push("Please enter your Name");
+    }
+
+    if(req.body.email === ""){
+        errorMsg1.push("Please enter your Email");
+    }
+
+    if(req.body.password === ""){
+        errorMsg2.push("Please enter your Password");
+    }
+    
+    if(!(req.body.password === "") && len < 6 || len > 16){
+        errorMsg2.push("Password must be between 6 and 16 characters");
+    }
+    
+    if(!(req.body.password.match(reg1))){
+        errorMsg2.push("Password");
+    }
+
+    if(errorMsg.length > 0 || errorMsg1.length > 0 || errorMsg2.length > 0){
+        res.render("registration",{
+            title: 'Registration',
+            errName: errorMsg,
+            errId: errorMsg1,
+            errPass: errorMsg2,
+            name: req.body.name,
+            id: req.body.email,
+            pass: req.body.password,
+        });
+    }
+    else{
+        res.render("home",{
+            title: "One For All",
+            products: productsModel.getAllProducts(),
+            bseller: bsellingproducts.getAllProducts(),
+        });
     }
 });
 
