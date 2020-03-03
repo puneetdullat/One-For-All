@@ -9,6 +9,7 @@ const products3 = require("./model/product3");
 const products4 = require("./model/product4");
 const bodyParser = require('body-parser');
 
+require('dotenv').config({path:"./config/keys.env"})
 
 app.engine("handlebars",exphbs());
 app.set("view engine", "handlebars");
@@ -71,6 +72,12 @@ app.get("/registration",(req,res)=>{
     });
 });
 
+app.get("/dashboard",(req,res)=>{
+    res.render("dashboard",{
+        title: 'One For All',
+    });
+});
+
 app.post("/loginvalidation",(req,res)=>{
     const errorMsg = [];
     const errorMsg1 = [];
@@ -103,7 +110,7 @@ app.post("/registrationvalidation",(req,res)=>{
     const errorMsg = [];
     const errorMsg1 = [];
     const errorMsg2 = [];
-    const reg = /^[a-zA-Z]+$/; 
+    const reg = /^[a-zA-Z]+\s?[a-zA-Z]+\s?[a-zA-Z]+\s?$/; 
     const reg1 = /^\w+$/g;
     const reg2 = /[\w-]+@([\w-]+\.)+[\w-]+/;
     const len = req.body.password.length;
@@ -113,6 +120,10 @@ app.post("/registrationvalidation",(req,res)=>{
 
     if(req.body.email === ""){
         errorMsg1.push("Please enter your Email");
+    }
+
+    if(!(req.body.email === "") && !(req.body.email.match(reg2))){
+        errorMsg1.push("Please enter your Email in correct format");
     }
 
     if(req.body.password === ""){
@@ -139,15 +150,29 @@ app.post("/registrationvalidation",(req,res)=>{
         });
     }
     else{
-        res.render("home",{
-            title: "One For All",
-            products: productsModel.getAllProducts(),
-            bseller: bsellingproducts.getAllProducts(),
-        });
+        const sgMail = require('@sendgrid/mail');
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const msg = {
+            to: `${req.body.email}`,
+            from: 'oneforall@one.com',
+            subject: 'Its working',
+            text: 'One For All',
+            html: 'Thank You for registering with <strong>one for all</strong>, We hope you have a wonderful journey on our site.',
+        };
+        sgMail.send(msg)
+        .then(()=>{
+            res.render("dashboard",{
+                title: "One For All",
+                name: req.body.name,
+            });
+        })
+        .catch(err=>{
+            console.log(`Error ${err}`);
+        })
     }
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 app.listen(PORT,()=>{
     console.log(`Website is Up and Running`);
 });
