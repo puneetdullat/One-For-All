@@ -9,7 +9,7 @@ const products3 = require("./model/product3");
 const products4 = require("./model/product4");
 const bodyParser = require('body-parser');
 
-require('dotenv').config({path:"./config/keys.env"})
+require('dotenv').config({path:"./configure/keys.env"})
 
 app.engine("handlebars",exphbs());
 app.set("view engine", "handlebars");
@@ -110,11 +110,9 @@ app.post("/registrationvalidation",(req,res)=>{
     const errorMsg = [];
     const errorMsg1 = [];
     const errorMsg2 = [];
-    const reg = /^[a-zA-Z]+\s?[a-zA-Z]+\s?[a-zA-Z]+\s?$/; 
-    const reg1 = /^\w+$/g;
-    const reg2 = /[\w-]+@([\w-]+\.)+[\w-]+/;
+    const reg = /[\w-]+@([\w-]+\.)+[\w-]+/;
     const len = req.body.password.length;
-    if(req.body.name === "" || !(req.body.name.match(reg))){
+    if(req.body.name === ""){
         errorMsg.push("Please enter your Name");
     }
 
@@ -122,7 +120,7 @@ app.post("/registrationvalidation",(req,res)=>{
         errorMsg1.push("Please enter your Email");
     }
 
-    if(!(req.body.email === "") && !(req.body.email.match(reg2))){
+    if(!(req.body.email === "") && !(req.body.email.match(reg))){
         errorMsg1.push("Please enter your Email in correct format");
     }
 
@@ -134,8 +132,16 @@ app.post("/registrationvalidation",(req,res)=>{
         errorMsg2.push("Password must be between 6 and 16 characters");
     }
     
-    if(!(req.body.password.match(reg1))){
-        errorMsg2.push("Password");
+    if(!(req.body.password === "") && !(req.body.password.match(/[0-9]/))){
+        errorMsg2.push("Password must contain number");
+    }
+
+    if(!(req.body.password === "") && !(req.body.password.match(/[A-Z]/))){
+        errorMsg2.push("Password must contain a upper case letter");
+    }
+
+    if(!(req.body.password === "") && (req.body.password.match(/\s/))){
+        errorMsg2.push("Password must not contain a whitespace");
     }
 
     if(errorMsg.length > 0 || errorMsg1.length > 0 || errorMsg2.length > 0){

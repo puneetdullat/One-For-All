@@ -80,6 +80,11 @@ header h2{
     height:100%;
     width:100%;
 }
+#for_style{
+    font-family: sans-serif;
+    font-size: x-large;
+    padding-left: 0.50em;
+}
 .home_img{
     height: 12em;
     width: 100%;
@@ -339,6 +344,9 @@ main{
     #form_login{
         margin: 1.2em;
     }
+    #login_email, #login_password {
+        width: 16em;
+    }
     #btn_login{
         margin: 0;
     }#form_regis{
@@ -369,12 +377,12 @@ main{
         width: 14em;
     }
     .prod1_img {
-        height: 15em;
-        width: 19em;
+        height: 12em;
+        width: 17em;
     }
     .prod_img {
-        height: 15em;
-        width: 19em;
+        height: 12em;
+        width: 17em;
     }
     .prod1_div{
         margin: 10px;
@@ -396,6 +404,17 @@ main{
     .sec_main{
         font-size: large;
     }
+    #h_pad{
+        display: flex;
+        flex-direction: column;
+    }
+    header h2{
+        margin: 0;
+        margin-bottom: 0.5em;
+    }
+    footer form #sub{
+        margin-right: 100px;
+    }
  }
 
 @media (min-width: 576px) and (max-width: 767.98px) { 
@@ -416,7 +435,7 @@ main{
         width: 17em;
     }
     .prod1_div{
-        margin-left: 4em;
+        margin-left: 1em;
     }
     .prod_div{
         margin-left: 1em;
@@ -428,6 +447,16 @@ main{
     .sec_main{
         font-size: large;
     }
+    .sec_allprod{
+        text-align: center;
+    }
+    #sec_prod{
+        text-align: center;
+    }
+    .sec_prod{
+        text-align: center;
+    }
+    
  }
 
 @media (min-width: 768px) and (max-width: 991.98px) { 
@@ -435,7 +464,7 @@ main{
         padding: 0;
     }
     #searchbarinput{
-        width: 30em;
+        width: 26em;
     }
     .slogan{
         margin: 0;
@@ -448,6 +477,21 @@ main{
  .sec_main{
      font-size: large;
  }
+ .sec_allprod{
+    text-align: center;
+}
+#sec_prod{
+    text-align: center;
+}
+.sec_prod{
+    text-align: center;
+}
+.prod1_div{
+    margin-left: 1em;
+}
+.prod_div{
+    margin-left: 1em;
+}
 }
 @media (min-width: 992px) and (max-width: 1199.98px) { 
     #h_pad {
@@ -464,6 +508,9 @@ main{
     .prod_img {
         height: 16em;
         width: 20em;
+    }
+    .sec_main{
+        font-size: large;
     }
 }
 @media (min-width: 1200px) and (max-width: 1299.98px) {
