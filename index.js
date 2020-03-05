@@ -161,7 +161,7 @@ app.post("/registrationvalidation",(req,res)=>{
         const msg = {
             to: `${req.body.email}`,
             from: 'oneforall@one.com',
-            subject: 'Its working',
+            subject: 'New User Registration',
             text: 'One For All',
             html: 'Thank You for registering with <strong>one for all</strong>, We hope you have a wonderful journey on our site.',
         };
