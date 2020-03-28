@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
-
 const productsModel = require("../model/product");
+const regModel = require("../model/regUser");
 
 router.get("/",(req,res)=>{
     res.render("home",{
@@ -59,6 +59,11 @@ router.post("/loginvalidation",(req,res)=>{
 });
 
 router.post("/registrationvalidation",(req,res)=>{
+    const newUser = {
+        name : req.body.name,
+        email : req.body.email,
+        password : req.body.password
+    }
     const errorMsg = [];
     const errorMsg1 = [];
     const errorMsg2 = [];
@@ -108,7 +113,10 @@ router.post("/registrationvalidation",(req,res)=>{
         });
     }
     else{
-        const sgMail = require('@sendgrid/mail');
+        const reg = new regModel(newUser);
+        reg.save()
+        .then(()=>{
+            const sgMail = require('@sendgrid/mail');
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
             to: `${req.body.email}`,
@@ -125,8 +133,10 @@ router.post("/registrationvalidation",(req,res)=>{
             });
         })
         .catch(err=>{
-            console.log(`Error ${err}`);
+            console.log(`Error sending email ${err}`);
         })
+        })
+        .catch(err=>console.log(`Error while saving in Database ${err}`));
     }
 });
 
