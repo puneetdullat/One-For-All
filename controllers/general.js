@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router();
 const productsModel = require("../model/product");
 const regModel = require("../model/regUser");
+const bcrypt = require("bcryptjs");
+
 
 router.get("/",(req,res)=>{
     res.render("home",{
@@ -40,22 +42,46 @@ router.post("/loginvalidation",(req,res)=>{
     if(req.body.password === ""){
         errorMsg1.push("Please enter your Password");
     }
-
-    if(errorMsg.length > 0 || errorMsg1.length > 0){
-        res.render("login",{
-            title: 'Login',
-            errId: errorMsg,
-            errPass: errorMsg1,
-            id: req.body.email,
-            pass: req.body.password,
-        });
-    }
-    else{
-        res.render("login",{
-            title: 'login',
-            msg: "Successfully loged IN",
-        });
-    }
+    regModel.findOne({email:req.body.email})
+    .then((value)=>{
+        if(value===null){
+            if(req.body.email !== ""){
+                errorMsg.push("This email is not registered with us.");
+            }
+            res.render("login",{
+                title: 'Login',
+                errId: errorMsg,
+                errPass: errorMsg1,
+                id: req.body.email,
+                pass: req.body.password,
+            });
+        }
+        else{
+            bcrypt.compare(req.body.password,value.password)
+            .then((success)=>{
+                if(success == true){
+                    res.render("login",{
+                        title: 'login',
+                        msg: "Successfully loged IN",
+                    });
+                }
+                else{
+                    if(req.body.password !== ""){
+                        errorMsg1.push("Wrong password");
+                    }
+                    res.render("login",{
+                        title: 'Login',
+                        errId: errorMsg,
+                        errPass: errorMsg1,
+                        id: req.body.email,
+                        pass: req.body.password,
+                    });
+                }
+            })
+            .catch(err=>console.log(`Error while checking for password`));
+        }
+    })
+    .catch(err=>console.log(`Error while checking for Email ${err}`));
 });
 
 router.post("/registrationvalidation",(req,res)=>{
@@ -136,7 +162,19 @@ router.post("/registrationvalidation",(req,res)=>{
             console.log(`Error sending email ${err}`);
         })
         })
-        .catch(err=>console.log(`Error while saving in Database ${err}`));
+        .catch((err)=>{
+            errorMsg1.push("Email already registered.");
+            res.render("registration",{
+                title: 'Registration',
+                errName: errorMsg,
+                errId: errorMsg1,
+                errPass: errorMsg2,
+                name: req.body.name,
+                id: req.body.email,
+                pass: req.body.password,
+            });
+            console.log(`Error while saving in Database ${err}`);
+        });
     }
 });
 
