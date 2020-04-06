@@ -22,8 +22,12 @@
         </div>
         <div class="for_flex" id="h_pad">
           <h2><a class="sec_main" href="/product/products">Products</a></h2>
-          <h2><a class="sec_main" href="/login">Sign In</a></h2>
-          <h2><a class="sec_main" href="/registration">Sign Up</a></h2>
+          {{#if info}}
+            <h2><a class="sec_main" href="/logout">Logout</a></h2>
+          {{else}}
+            <h2><a class="sec_main" href="/login">Sign In</a></h2>
+            <h2><a class="sec_main" href="/registration">Sign Up</a></h2>
+          {{/if}}
         </div>
       </nav>
     </header>

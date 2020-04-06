@@ -3,6 +3,7 @@ const app = express();
 const exphbs= require("express-handlebars");
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+const session = require('express-session');
 
 app.use(fileUpload());
 
@@ -16,6 +17,17 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(session({
+    secret: `${process.env.SECRET_KEY}`,
+    resave: false,
+    saveUninitialized: true
+}))
+
+app.use((req,res,next)=>{
+    res.locals.info =  req.session.loged_in;
+    next();
+})
 
 const generalController = require("./controllers/general");
 const productController = require("./controllers/product");

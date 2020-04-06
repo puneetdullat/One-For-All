@@ -3,12 +3,34 @@ const router = express.Router();
 const saleModel = require("../model/prodSale");
 const productsModel = require("../model/product");
 const path = require("path");
+const inSession = require("../middleware/auth");
 
 router.get("/products",(req,res)=>{
-    res.render("products",{
+    saleModel.find()
+    .then((products)=>{
+        const filteredprod =   products.map(prod=>{
+            return {
+                id: prod._id,
+                title: prod.title,
+                price: prod.price,
+                description: prod.description,
+                best: prod.best,
+                photo: prod.photo
+            }
+        });
+        res.render("products",{
+            data : filteredprod
+         }); 
+    })
+    .catch(err=>console.log(`Error pulling data from the database ${err}`));
+    
+    
+    
+    
+    /* res.render("products",{
         title: 'Products',
         products: productsModel.fakeDB.prod
-    });
+    });*/
 });
 
 router.get("/products1",(req,res)=>{
@@ -26,7 +48,7 @@ router.get("/products2",(req,res)=>{
 });
 
 router.get("/products3",(req,res)=>{
-    res.render("products",{
+    res.render("products",{ 
         title: 'Computer Accessories',
         products: productsModel.fakeDB.prod3
     });
@@ -39,7 +61,9 @@ router.get("/products4",(req,res)=>{
     });
 });
 
-router.get("/add",(req,res)=>{
+router.get("/")
+
+router.get("/add",inSession,(req,res)=>{
     res.render("productAdd",{
         title: 'Add Products'
     });

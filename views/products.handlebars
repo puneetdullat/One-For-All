@@ -1,21 +1,13 @@
 <section class="sec_prod">
-    {{#each products}}
-    {{#if href}}
-    <a href="{{href}}"><div class="prod_div">
-        <p class="home_pro">{{title}}</p>
-        <img class="prod_img" src="{{src}}" alt="Products">
-    </div></a>
-    {{/if}}
-    {{#if category}}
+    {{#each data}}
         <div class="prod1_div">
-            {{#if best}}
-            <img class="best_seller_img" src="{{src1}}" alt="">
+            {{#if this.best}}
+            <img class="best_seller_img" src="/img/bestseller.png" alt="">
             {{/if}}
-            <img class="prod1_img" src="{{src}}" alt="Products">
-            <br><span class="title_of_items">{{title}}</span>
-            <br><span class="price_of_items">{{price}}</span>
-            <span class="span_cate">{{category}}</span>
+            <img class="prod1_img" src="/img/{{this.photo}}" alt="Products">
+            <br><span class="title_of_items">{{this.title}}</span>
+            <br><span class="price_of_items">{{this.price}}</span>
+            <span class="span_cate">{{this.category}}</span>
         </div>
-    {{/if}}
     {{/each}}
 </section>

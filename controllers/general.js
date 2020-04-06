@@ -3,6 +3,7 @@ const router = express.Router();
 const productsModel = require("../model/product");
 const regModel = require("../model/regUser");
 const bcrypt = require("bcryptjs");
+const inSession = require("../middleware/auth");
 
 
 router.get("/",(req,res)=>{
@@ -26,7 +27,7 @@ router.get("/registration",(req,res)=>{
     });
 });
 
-router.get("/dashboard",(req,res)=>{
+router.get("/dashboard",inSession,(req,res)=>{
     res.render("dashboard",{
         title: 'One For All',
     });
@@ -46,7 +47,7 @@ router.post("/loginvalidation",(req,res)=>{
     .then((value)=>{
         if(value===null){
             if(req.body.email !== ""){
-                errorMsg.push("This email is not registered with us.");
+                errorMsg.push("Your email or password is wrong");
             }
             res.render("login",{
                 title: 'Login',
@@ -60,14 +61,12 @@ router.post("/loginvalidation",(req,res)=>{
             bcrypt.compare(req.body.password,value.password)
             .then((success)=>{
                 if(success == true){
-                    res.render("login",{
-                        title: 'login',
-                        msg: "Successfully loged IN",
-                    });
+                    req.session.loged_in = value;
+                    res.redirect("/dashboard")
                 }
                 else{
                     if(req.body.password !== ""){
-                        errorMsg1.push("Wrong password");
+                        errorMsg1.push("Your email or password is wrong");
                     }
                     res.render("login",{
                         title: 'Login',
@@ -177,5 +176,10 @@ router.post("/registrationvalidation",(req,res)=>{
         });
     }
 });
+
+router.get("/logout",(req,res)=>{
+    req.session.destroy();
+    res.redirect("/login");
+})
 
 module.exports = router;
