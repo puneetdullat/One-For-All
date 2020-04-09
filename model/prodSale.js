@@ -12,7 +12,7 @@ const prodSchema = new Schema({
     price:
     {
        type:String,
-       unique:true
+       required:true
     },
 
     description:

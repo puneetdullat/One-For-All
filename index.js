@@ -5,13 +5,33 @@ const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
 
+app.use((req,res,next)=>{
+    if(req.query.method=="PUT"){
+        req.method="PUT"
+    }
+    else if(req.query.method=="DELETE"){
+        req.method="DELETE"
+    }
+    next();
+})
+
 app.use(fileUpload());
 
 const bodyParser = require('body-parser');
 
 require('dotenv').config({path:"./configure/keys.env"})
 
-app.engine("handlebars",exphbs());
+app.engine("handlebars",exphbs({
+            helpers:{
+                if_eq:function(a, b, opts){
+                    if(a == b)
+                        return opts.fn(this);
+                    else
+                        return opts.inverse(this);
+                }    
+            }
+        }
+));
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));

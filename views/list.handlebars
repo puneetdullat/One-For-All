@@ -1,0 +1,42 @@
+<table border="1" style="text-align: center;">
+        <thead>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Best Seller</th>
+                <th>Operation</th>
+        </thead>
+        <tbody>
+            {{#each data}}
+                <tr>
+                   <td>
+                        <span>{{this.title}}</span>
+                   </td>
+                   <td>
+                       <span>${{this.price}}</span>
+                      
+                   </td>
+                   <td>
+                        <span>{{this.category}}</span>
+                   </td>
+                   <td>
+                       <span>{{this.quantity}}</span>
+                   </td>
+                   <td>
+                       <span>{{this.best}}</span>
+                   </td>
+                   <td>
+                        <a href="/product/edit/{{this.id}}">Edit</a>
+                        <a href="/product/delete/{{this.id}}?method=DELETE">Delete</a>
+                   </td> 
+                </tr>
+
+                {{else}}
+                    <td colspan="6">
+                        <p>No products in the database</p>
+                    </td>
+
+                {{/each}}
+    </tbody>
+    </table>

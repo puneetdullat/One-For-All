@@ -37,17 +37,19 @@ html,body{
     margin:0;
     width: 50em;
     background: white;
-    border-radius: 25px 0px 0px 25px;
+    border-radius: 10px 10px 10px 10px;
     outline:0px;
 }
 #searchbutton{
     cursor: pointer;
     padding: 10px;
     border:0;
-    border-radius: 0px 25px 25px 0px;
+    border-radius: 10px 10px 10px 10px;
     margin: 0;
+    margin-left: 0.5em;
     color: #f65058ff ;
     background: white;      
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 header h2{
     color: cadetblue;

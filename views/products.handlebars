@@ -1,12 +1,12 @@
 <section class="sec_prod">
     {{#each data}}
         <div class="prod1_div">
-            {{#if this.best}}
+            {{#if_eq this.best "yes"}}
             <img class="best_seller_img" src="/img/bestseller.png" alt="">
-            {{/if}}
+            {{/if_eq}}
             <img class="prod1_img" src="/img/{{this.photo}}" alt="Products">
             <br><span class="title_of_items">{{this.title}}</span>
-            <br><span class="price_of_items">{{this.price}}</span>
+            <br><span class="price_of_items">${{this.price}}</span>
             <span class="span_cate">{{this.category}}</span>
         </div>
     {{/each}}

@@ -4,14 +4,30 @@ const productsModel = require("../model/product");
 const regModel = require("../model/regUser");
 const bcrypt = require("bcryptjs");
 const inSession = require("../middleware/auth");
+const saleModel = require("../model/prodSale");
 
 
 router.get("/",(req,res)=>{
-    res.render("home",{
-        title: "One For All",
-        products: productsModel.fakeDB.prod,
-        bseller: productsModel.fakeDB.best
-    });
+    saleModel.find()
+    .then((products)=>{
+        const filteredprod = products.map(prod=>{
+            return {
+                id: prod._id,
+                title: prod.title,
+                price: prod.price,
+                description: prod.description,
+                best: prod.best,
+                photo: prod.photo,
+                category: prod.category
+            }
+        });
+        res.render("home",{
+            title: "One For All",
+            products: productsModel.fakeDB.prod,
+            bseller : filteredprod
+         }); 
+    })
+    .catch(err=>console.log(`Error pulling data from the database ${err}`));
 });
 
 
