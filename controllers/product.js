@@ -4,8 +4,9 @@ const saleModel = require("../model/prodSale");
 const productsModel = require("../model/product");
 const path = require("path");
 const inSession = require("../middleware/auth");
+const isAdmin = require("../middleware/isAdmin");
 
-router.get("/productlist",(req,res)=>{
+router.get("/productlist",inSession,isAdmin,(req,res)=>{
     saleModel.find()
     .then((products)=>{
         const filteredprod = products.map(prod=>{
@@ -25,7 +26,7 @@ router.get("/productlist",(req,res)=>{
     .catch(err=>console.log(`Error pulling data from the database ${err}`));
 });
 
-router.get("/edit/:id",(req,res)=>{
+router.get("/edit/:id",inSession,isAdmin,(req,res)=>{``
     saleModel.findById(req.params.id)
     .then((prod)=>{
         res.render("productEdit",{
@@ -181,12 +182,8 @@ router.get("/products4",(req,res)=>{
     .catch(err=>console.log(`Error pulling data from the database ${err}`));
 });
 
-router.get("/")
-
-router.get("/add",inSession,(req,res)=>{
-    res.render("productAdd",{
-        title: 'Add Products'
-    });
+router.get("/add",inSession,isAdmin,(req,res)=>{
+    res.render("productAdd");
 });
 
 router.post("/addproduct",(req,res)=>{
@@ -220,9 +217,7 @@ router.post("/addproduct",(req,res)=>{
     }
 
     if(titlemsg.length > 0 || pricemsg.length > 0 || descmsg.length > 0 || catemsg.length > 0 || quanmsg.length > 0){
-        res.render("productAdd",{
-            title: 'Add Products'
-        });
+        res.render("productAdd");
     }
     else{
         const pro = new saleModel(newProd)

@@ -5,6 +5,8 @@ const regModel = require("../model/regUser");
 const bcrypt = require("bcryptjs");
 const inSession = require("../middleware/auth");
 const saleModel = require("../model/prodSale");
+const dashboardSelector = require("../middleware/authorization");
+const isAdmin = require("../middleware/isAdmin");
 
 
 router.get("/",(req,res)=>{
@@ -22,7 +24,6 @@ router.get("/",(req,res)=>{
             }
         });
         res.render("home",{
-            title: "One For All",
             products: productsModel.fakeDB.prod,
             bseller : filteredprod
          }); 
@@ -32,22 +33,14 @@ router.get("/",(req,res)=>{
 
 
 router.get("/login",(req,res)=>{
-    res.render("login",{
-        title: 'Login',
-    });
+    res.render("login");
 });
 
 router.get("/registration",(req,res)=>{
-    res.render("registration",{
-        title: 'Registration',
-    });
+    res.render("registration");
 });
 
-router.get("/dashboard",inSession,(req,res)=>{
-    res.render("dashboard",{
-        title: 'One For All',
-    });
-});
+router.get("/dashboard",inSession,dashboardSelector);
 
 router.post("/loginvalidation",(req,res)=>{
     const errorMsg = [];
@@ -66,7 +59,6 @@ router.post("/loginvalidation",(req,res)=>{
                 errorMsg.push("Your email or password is wrong");
             }
             res.render("login",{
-                title: 'Login',
                 errId: errorMsg,
                 errPass: errorMsg1,
                 id: req.body.email,
@@ -85,7 +77,6 @@ router.post("/loginvalidation",(req,res)=>{
                         errorMsg1.push("Your email or password is wrong");
                     }
                     res.render("login",{
-                        title: 'Login',
                         errId: errorMsg,
                         errPass: errorMsg1,
                         id: req.body.email,
@@ -144,7 +135,6 @@ router.post("/registrationvalidation",(req,res)=>{
 
     if(errorMsg.length > 0 || errorMsg1.length > 0 || errorMsg2.length > 0){
         res.render("registration",{
-            title: 'Registration',
             errName: errorMsg,
             errId: errorMsg1,
             errPass: errorMsg2,
@@ -168,10 +158,7 @@ router.post("/registrationvalidation",(req,res)=>{
         };
         sgMail.send(msg)
         .then(()=>{
-            res.render("dashboard",{
-                title: "One For All",
-                name: req.body.name,
-            });
+            res.redirect("/login");
         })
         .catch(err=>{
             console.log(`Error sending email ${err}`);
@@ -180,7 +167,6 @@ router.post("/registrationvalidation",(req,res)=>{
         .catch((err)=>{
             errorMsg1.push("Email already registered.");
             res.render("registration",{
-                title: 'Registration',
                 errName: errorMsg,
                 errId: errorMsg1,
                 errPass: errorMsg2,
