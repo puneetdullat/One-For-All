@@ -35,7 +35,7 @@ html,body{
     padding: 10px;
     border:0;
     margin:0;
-    width: 50em;
+    width: 40em;
     background: white;
     border-radius: 10px 10px 10px 10px;
     outline:0px;
@@ -101,15 +101,18 @@ header h2{
 }
 #best_seller{
     position: static;
-    display: flex;
+    display: inline-block;
     height:100%;
     width:100%;
+    text-align: center;
 }
 .boxforbest{
     text-decoration: none;
-    flex: 1;
+    width:22%;
+    min-width:300px;
     padding:10px;
     margin:10px;
+    display: inline-block;
     border:1px solid darkgrey;
     background-color:white;
 }
@@ -121,7 +124,7 @@ header h2{
     background-color:  darkred;
     color: whitesmoke;
 }
-#form_regis{
+.form_regis{
     display: inline-block;
     margin: 2em;
     margin-top: 55px;
@@ -307,14 +310,14 @@ main{
     height: 40px;
     width: 100%;
 }
-#form_regis input{
+.form_regis input{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height:18px;
     padding:10px;
     border-radius:3px;
     border:1px solid gray;
 }
-#form_regis input[type="submit"]{
+.form_regis input[type="submit"]{
     height: 40px;
     width: 100%;
 }
@@ -351,7 +354,8 @@ main{
     }
     #btn_login{
         margin: 0;
-    }#form_regis{
+    }
+    .form_regis{
         margin: 1.2em;
     }
     #btn_regis{
@@ -363,7 +367,13 @@ main{
     .main_head_lr{
         font-size: 1.75em;
     }
-    #home_sec, #best_seller{
+    #best_seller{
+        display: inline-block;
+    }
+    .boxforbest{
+        min-width:92%;
+    }
+    #home_sec{
         display: grid;
     }
     .slogan {
@@ -427,13 +437,19 @@ main{
 
 @media (min-width: 576px) and (max-width: 767.98px) { 
 
+    header h2 {
+        
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
 .slogan{
         margin: 0;
         top: 54px;
         font-size: 2.2em;   
     }
     #searchbarinput {
-        width: 16em;
+        width: 12em;
     }
     #h_pad{
         padding-left: 5px;
@@ -455,6 +471,9 @@ main{
     .sec_main{
         font-size: large;
     }
+    .boxforbest{
+        min-width:300px;
+    }
     .sec_allprod{
         text-align: center;
     }
@@ -472,7 +491,7 @@ main{
         padding: 0;
     }
     #searchbarinput{
-        width: 26em;
+        width: 20em;
     }
     .slogan{
         margin: 0;
@@ -506,7 +525,7 @@ main{
         padding-left: 8em;
     }
     #searchbarinput{
-        width: 36em;
+        width: 25em;
     }
     .prod_div{
         margin:10px;
@@ -534,6 +553,27 @@ main{
         padding-left: 16em;
     }
     #searchbarinput{
-        width: 40em;
+        width: 32em;
     }
+}
+#desc_sec{
+    display: flex;
+}
+.desc_img{
+    margin: 2em;
+    height: 15em;
+    width: auto;
+}
+.dashboard_admin{
+    text-decoration: none;
+    margin: 1em;
+}
+.p_dash{
+    padding-left: 0.75em;
+    color: crimson;
+    font-family: sans-serif;
+    font-size: larger;
+}
+.desc_span{
+    font-family: sans-serif;
 }

@@ -17,18 +17,7 @@
 <section id="best_seller">
     {{#each bseller}}
         {{#if_eq this.best "yes"}}
-            {{#if_eq this.category "watch"}}
-                <a href="/product/products1" class="boxforbest"><div>
-            {{/if_eq}}
-            {{#if_eq this.category "sunglasses"}}
-                <a href="/product/products2" class="boxforbest"><div>
-            {{/if_eq}}
-            {{#if_eq this.category "perfume"}}
-                <a href="/product/products4" class="boxforbest"><div>
-            {{/if_eq}}
-            {{#if_eq this.category "accessories"}}
-                <a href="/product/products3" class="boxforbest"><div>
-            {{/if_eq}}
+            <a href="/product/description/{{this.id}}" class="boxforbest"><div>
                 <p class="home_pro">
                     {{title}}
                 </p>

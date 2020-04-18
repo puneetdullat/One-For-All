@@ -6,6 +6,7 @@ const path = require("path");
 const inSession = require("../middleware/auth");
 const isAdmin = require("../middleware/isAdmin");
 
+
 router.get("/productlist",inSession,isAdmin,(req,res)=>{
     saleModel.find()
     .then((products)=>{
@@ -209,15 +210,17 @@ router.post("/addproduct",(req,res)=>{
     if(req.body.description === ""){
         descmsg.push("Please enter a description for the product");
     }
-    if(req.body.category === ""){
-        catemsg.push("Please enter a category for the product");
-    }
     if(req.body.quantity === ""){
         quanmsg.push("Please enter a quantity for the product");
     }
 
     if(titlemsg.length > 0 || pricemsg.length > 0 || descmsg.length > 0 || catemsg.length > 0 || quanmsg.length > 0){
-        res.render("productAdd");
+        res.render("productAdd",{
+            titlemsg,
+            pricemsg,
+            descmsg,
+            quanmsg
+        });
     }
     else{
         const pro = new saleModel(newProd)
@@ -230,7 +233,7 @@ router.post("/addproduct",(req,res)=>{
                     photo : req.files.photo.name
                 })
                 .then(()=>{
-                    res.redirect("/product/add");
+                    res.redirect("/");
                 })
                 .catch(err=>console.log(`Error while saving new product in database in last ${err}`));
             })
@@ -240,5 +243,65 @@ router.post("/addproduct",(req,res)=>{
     }
 });
 
+router.get("/description/:id",(req,res)=>{
+    saleModel.findById(req.params.id)
+    .then((prod)=>{
+        res.render("description",{
+            id: prod.id,
+            title: prod.title,
+            price: prod.price,
+            description: prod.description,
+            category: prod.category,
+            quantity: prod.quantity,
+            photo: prod.photo
+        });
+    })
+    .catch(err=>console.log(`Error while opening description page of the product ${err}`));
+});
+
+router.get("/cart",inSession,(req,res)=>{
+    res.render("cart");
+});
+
+router.post("/cart",inSession,(req,res)=>{
+    saleModel.findById(req.body.id)
+
+    .then((prod)=>{
+        let total = 0;
+        if(!req.session.buy){
+            req.session.buy = [];
+        }
+        prod.quantity = req.body.quantity;
+        req.session.buy.push(prod);
+
+        req.session.buy.forEach((buy) =>{
+            total += Number(buy.quantity) *Number(buy.price);
+        })
+        req.session.total = total;
+        res.redirect("/");
+    })
+    .catch(err=>console.log(`Error while loading cart ${err}`))
+})
+
+router.post("/buy",(req,res)=>{
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+        to: `${req.session.loged_in.email}`,
+        from: 'oneforall@one.com',
+        subject: 'Your Order',
+        text: 'One For All',
+        html: `This is a Test`
+    };
+    sgMail.send(msg)
+    .then(()=>{
+        res.redirect("/");
+    })
+    .catch(err=>{
+        console.log(`Error sending email ${err}`);
+    })
+    req.session.buy = [];
+    req.session.total = 0;
+});
 
 module.exports = router;

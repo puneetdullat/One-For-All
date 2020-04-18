@@ -158,7 +158,7 @@ router.post("/registrationvalidation",(req,res)=>{
         };
         sgMail.send(msg)
         .then(()=>{
-            res.redirect("/login");
+            res.redirect("/dashboard");
         })
         .catch(err=>{
             console.log(`Error sending email ${err}`);

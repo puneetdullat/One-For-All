@@ -1,5 +1,6 @@
 <section class="sec_prod">
     {{#each data}}
+    <a href="/product/description/{{this.id}}">
         <div class="prod1_div">
             {{#if_eq this.best "yes"}}
             <img class="best_seller_img" src="/img/bestseller.png" alt="">
@@ -9,5 +10,6 @@
             <br><span class="price_of_items">${{this.price}}</span>
             <span class="span_cate">{{this.category}}</span>
         </div>
+    </a>
     {{/each}}
 </section>

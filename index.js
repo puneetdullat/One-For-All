@@ -28,7 +28,13 @@ app.engine("handlebars",exphbs({
                         return opts.fn(this);
                     else
                         return opts.inverse(this);
-                }    
+                },    
+                check:function(a, b, opts){
+                    if(a > b)
+                        return opts.fn(this);
+                    else
+                        return opts.inverse(this);
+                }
             }
         }
 ));
@@ -46,6 +52,12 @@ app.use(session({
 
 app.use((req,res,next)=>{
     res.locals.info =  req.session.loged_in;
+    next();
+})
+
+app.use((req,res,next)=>{
+    res.locals.itemsInCart = req.session.buy;
+    res.locals.total = req.session.total;
     next();
 })
 

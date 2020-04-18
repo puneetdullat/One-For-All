@@ -1,0 +1,19 @@
+<section id="desc_sec">
+<img src="/img/{{this.photo}}" class="desc_img">
+<div style="margin:2em;">
+    <span style="font-weight: 600;" class="desc_span">{{this.title}}</span><br><br>
+    <span class="desc_span">{{this.description}}</span><br><br>
+    <span style="color: darkred;" class="desc_span">Price: CDN${{this.price}}</span><br><br>
+    {{#check this.quantity "0"}}
+    <span style="color: green;" class="desc_span">IN STOCK</span><br><br>
+    {{else}}
+    <span style="color: darkred;" class="desc_span">OUT OF STOCK</span><br><br>
+    {{/check}}
+    <form action="/product/cart" method="POST">
+        <label class="desc_span" for="quantity">Quantity to Order(Max: 3)</label>
+        <input type="number" value="1" max="3" min="1" name='quantity'><br><br>
+        <input type="submit" value="Add to cart">
+        <input type="hidden" value={{this.id}} name="id">
+    </form>
+</div>
+</section>

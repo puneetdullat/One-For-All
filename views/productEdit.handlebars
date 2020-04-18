@@ -1,13 +1,13 @@
-<form action="/product/update/{{this.id}}?method=PUT" method="POST">
-    <p>UPDATE PRODUCT</p>
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title" autofocus tabindex="0" value="{{title}}"><br>
+<form action="/product/update/{{this.id}}?method=PUT" method="POST" class="form_regis">
+    <p class="main_head_lr">UPDATE PRODUCT</p>
+    <label for="title">Title</label><br>
+    <input type="text" name="title" id="title" autofocus tabindex="0" value="{{title}}"><br><br>
 
-    <label for="price">Price</label>
-    <input type="text" name="price" id="price" tabindex="0" value="{{price}}"><br>
+    <label for="price">Price</label><br>
+    <input type="text" name="price" id="price" tabindex="0" value="{{price}}"><br><br>
 
-    <label for="description">Description</label>
-    <textarea name="description" id="description" tabindex="0" cols="30" rows="10">{{description}}</textarea><br>
+    <label for="description">Description</label><br>
+    <textarea name="description" id="description" tabindex="0" cols="40" rows="10">{{description}}</textarea><br><br>
 
     <label for="category">Category</label>
     <select name="category" tabindex="0">
@@ -15,16 +15,16 @@
         <option value="watch"{{#if_eq this.category "watch"}} selected {{/if_eq}}>Watch</option>
         <option value="sunglasses"{{#if_eq this.category "sunglasses"}} selected {{/if_eq}}>Sunglasses</option>
         <option value="accessories"{{#if_eq this.category "accessories"}} selected {{/if_eq}}>Computer Accessories</option>
-    </select><br>
+    </select><br><br>
 
-    <label for="quantity">Quantity</label>
-    <input type="number" name="quantity" id="quantity" tabindex="0" value="{{quantity}}"><br>
+    <label for="quantity">Quantity</label><br>
+    <input type="number" name="quantity" id="quantity" tabindex="0" value="{{quantity}}"><br><br>
 
     <label for="best">Best Seller</label>
     <select name="best" tabindex="0">
         <option value="no"{{#if_eq this.best "no"}} selected {{/if_eq}}>No</option>
         <option value="yes"{{#if_eq this.best "yes"}} selected {{/if_eq}}>Yes</option>
-    </select><br>
+    </select><br><br>
 
-    <input type="submit" value="ADD" tabindex="0">
+    <input type="submit" value="UPDATE" tabindex="0">
 </form>
