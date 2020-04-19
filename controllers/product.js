@@ -62,7 +62,7 @@ router.put("/update/:id",(req,res)=>{
 router.delete("/delete/:id",(req,res)=>{
     saleModel.deleteOne({_id:req.params.id})
     .then(()=>{
-        res.redirect("/product/productlist");
+        res.redirect("/");
     })
     .catch(err=>console.log(`Error while deleting from the database ${err}`))
 })
@@ -187,7 +187,7 @@ router.get("/add",inSession,isAdmin,(req,res)=>{
     res.render("productAdd");
 });
 
-router.post("/addproduct",(req,res)=>{
+router.post("/addproduct",inSession,isAdmin,(req,res)=>{
     const newProd = {
         title:req.body.title,
         price:req.body.price,
@@ -268,6 +268,7 @@ router.post("/cart",inSession,(req,res)=>{
 
     .then((prod)=>{
         let total = 0;
+        
         if(!req.session.buy){
             req.session.buy = [];
         }
@@ -283,7 +284,13 @@ router.post("/cart",inSession,(req,res)=>{
     .catch(err=>console.log(`Error while loading cart ${err}`))
 })
 
-router.post("/buy",(req,res)=>{
+router.post("/buy",inSession,(req,res)=>{
+    let emailDetails = "";
+    req.session.buy.forEach((buy) =>{
+        emailDetails += `<br>${buy.title} <br> Quantity: ${buy.quantity} <br>
+        Total: CDN$${Number(buy.quantity) *Number(buy.price)} <br>`
+    })
+    emailDetails += `<br>Order Total: CDN$${req.session.total}`;
     const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
@@ -291,7 +298,7 @@ router.post("/buy",(req,res)=>{
         from: 'oneforall@one.com',
         subject: 'Your Order',
         text: 'One For All',
-        html: `This is a Test`
+        html: emailDetails
     };
     sgMail.send(msg)
     .then(()=>{
